@@ -5,10 +5,12 @@ const {getAllTours,postTour,getTour,updateTour,deleteTour} = require('./../contr
  
 const router= express.Router();
 
+router.param('id',tourController.checkID);
+
 router
 .route('/')
 .get(getAllTours)
-.post(postTour);
+.post(tourController.checkBody,postTour);
 
 router
 .route('/:id')
