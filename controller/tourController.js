@@ -77,15 +77,32 @@ try{
   });
 
 }catch(err){
+  res.status(404).json({
+    status:'failed',
+    message:err
+    
+  })
 
 }  
 
 }
-exports.deleteTour= (req, res, next)=>{
 
+
+
+exports.deleteTour= async(req, res, next)=>{
+try{
+await Tour.findByIdAndDelete(req.params.id)
 res.status(204).json({
   status:'success',
   
   data:null
 });
+}catch(err){
+
+  res.status(404).json({
+    status:'failed',
+    message:err
+    
+  })
+}
 }
